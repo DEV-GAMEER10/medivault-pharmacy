@@ -6,9 +6,15 @@ define('DB_USER', getenv('DB_USER') ?: 'root');
 define('DB_PASS', getenv('DB_PASS') ?: '');
 
 try {
+    // Check if DB_HOST contains a port
+    $host_parts = explode(':', DB_HOST);
+    $host = $host_parts[0];
+    $port = isset($host_parts[1]) ? $host_parts[1] : '3306';
+
     // Create PDO connection
+    $dsn = "mysql:host=" . $host . ";port=" . $port . ";dbname=" . DB_NAME . ";charset=utf8mb4";
     $pdo = new PDO(
-        "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4",
+        $dsn,
         DB_USER,
         DB_PASS,
         [
