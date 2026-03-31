@@ -1,6 +1,6 @@
 <?php
 // purchases/index.php (Purchase History)
-require_once '../config/database.php';
+require_once __DIR__ . '/../config/database.php';
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../users/login.php');
@@ -26,7 +26,7 @@ $extra_css = '
         .table-modern tbody tr:hover { background: #f8fafc; }
     </style>
 ';
-include '../includes/header.php';
+include __DIR__ . '/../includes/header.php';
 ?>
 
 <div class="main-container">
@@ -153,4 +153,4 @@ include '../includes/header.php';
     loadPurchases();
 </script>
 
-<?php include '../includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

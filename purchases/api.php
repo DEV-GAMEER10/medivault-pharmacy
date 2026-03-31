@@ -1,6 +1,6 @@
 <?php
 // purchases/api.php
-require_once '../config/database.php';
+require_once __DIR__ . '/../config/database.php';
 session_start();
 
 if (!isset($_SESSION['user_id'])) {

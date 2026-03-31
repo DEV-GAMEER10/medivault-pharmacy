@@ -1,6 +1,6 @@
 <?php
 //invoice.php
-require_once '../config/database.php';
+require_once __DIR__ . '/../config/database.php';
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../users/login.php');
@@ -47,7 +47,7 @@ $extra_css = '
         .invoice-footer { background-color: #f8f9fa; }
     </style>
 ';
-include '../includes/header.php';
+include __DIR__ . '/../includes/header.php';
 ?>
     <div class="container mt-4">
         <!-- Print Buttons -->
@@ -184,4 +184,4 @@ include '../includes/header.php';
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<?php include '../includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

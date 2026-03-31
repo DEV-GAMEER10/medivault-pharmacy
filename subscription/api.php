@@ -8,7 +8,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-require_once '../config/database.php';
+require_once __DIR__ . '/../config/database.php';
 
 // Get JSON POST payload
 $inputJSON = file_get_contents('php://input');

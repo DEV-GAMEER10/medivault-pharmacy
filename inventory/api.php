@@ -9,8 +9,8 @@
 session_start();
 header('Content-Type: application/json');
 
-require_once '../config/database.php';
-require_once '../includes/subscription_check.php';
+require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../includes/subscription_check.php';
 
 // Function to handle errors and return a JSON response
 function json_error($message) {

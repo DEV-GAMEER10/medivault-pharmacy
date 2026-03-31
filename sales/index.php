@@ -1,6 +1,6 @@
 <?php
 //index.php
-require_once '../config/database.php';
+require_once __DIR__ . '/../config/database.php';
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../users/login.php');
@@ -244,7 +244,7 @@ $extra_css = '
         }
     </style>
 ';
-include '../includes/header.php';
+include __DIR__ . '/../includes/header.php';
 ?>
     <div class="main-container">
         <!-- Dashboard Header -->
@@ -376,4 +376,4 @@ include '../includes/header.php';
             });
         });
     </script>
-<?php include '../includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

@@ -1,6 +1,6 @@
 <?php
 //sales_history.php with Delete Functionality
-require_once '../config/database.php';
+require_once __DIR__ . '/../config/database.php';
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../users/login.php');
@@ -102,7 +102,7 @@ $extra_css = '
         .table-hover tbody tr:hover { background-color: rgba(102, 126, 234, 0.1); }
     </style>
 ';
-include '../includes/header.php';
+include __DIR__ . '/../includes/header.php';
 ?>
     <div class="container-fluid mt-4">
         <!-- Header -->
@@ -366,4 +366,4 @@ include '../includes/header.php';
             });
         });
     </script>
-<?php include '../includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

@@ -1,6 +1,6 @@
 <?php
 //new_sale.php
-require_once '../config/database.php';
+require_once __DIR__ . '/../config/database.php';
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../users/login.php');
@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] == 'process_sale') {
     try {
         // Subscription Limit Check: Daily Sales
-        require_once '../includes/subscription_check.php';
+        require_once __DIR__ . '/../includes/subscription_check.php';
         $limit = $_SESSION['limits']['sales'] ?? 50;
         $countStmt = $pdo->query("SELECT COUNT(*) FROM sales WHERE DATE(SaleDate) = CURDATE()");
         $currentSales = $countStmt->fetchColumn();
@@ -126,7 +126,7 @@ $extra_css = '
         }
     </style>
 ';
-include '../includes/header.php';
+include __DIR__ . '/../includes/header.php';
 ?>
     <div class="container-fluid mt-4">
         <!-- Header -->
@@ -730,4 +730,4 @@ include '../includes/header.php';
             } catch(e) { console.error(e); }
         }
     </script>
-<?php include '../includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

@@ -5,7 +5,7 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: ../users/login.php');
     exit;
 }
-require_once '../config/database.php';
+require_once __DIR__ . '/../config/database.php';
 
 function h($s) {
     return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
@@ -110,7 +110,7 @@ $extra_css = '
     .bg-seasonal { background: #e0e7ff; color: #3730a3; }
 </style>
 ';
-include '../includes/header.php';
+include __DIR__ . '/../includes/header.php';
 ?>
 
 <div class="container-fluid pb-5">
@@ -497,5 +497,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 ";
-include '../includes/footer.php';
+include __DIR__ . '/../includes/footer.php';
 ?>

@@ -1,6 +1,6 @@
 <?php
 // purchases/new_purchase.php
-require_once '../config/database.php';
+require_once __DIR__ . '/../config/database.php';
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../users/login.php');
@@ -35,7 +35,7 @@ $extra_css = '
         .total-amount { font-size: 2rem; font-weight: bold; color: #2563eb; }
     </style>
 ';
-include '../includes/header.php';
+include __DIR__ . '/../includes/header.php';
 ?>
 
 <div class="container-fluid">
@@ -299,4 +299,4 @@ include '../includes/header.php';
     });
 </script>
 
-<?php include '../includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

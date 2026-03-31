@@ -6,13 +6,13 @@ ini_set('display_errors', 1);
 session_start();
 
 // Check if config file exists
-if (!file_exists('../config/database.php')) {
+if (!file_exists(__DIR__ . '/../config/database.php')) {
     die('Config file not found. Please create config/database.php');
 }
 
 // Note: Browser check removed — login is now accessible from both the desktop app and direct browser access.
 
-require_once '../config/database.php';
+require_once __DIR__ . '/../config/database.php';
 
 // Create users table if it doesn't exist
 try {

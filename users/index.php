@@ -1,6 +1,6 @@
 <?php
 //users/index.php - User Management Dashboard
-require_once '../config/database.php';
+require_once __DIR__ . '/../config/database.php';
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             case 'add_user':
                 try {
                     // Subscription Limit Check
-                    require_once '../includes/subscription_check.php';
+                    require_once __DIR__ . '/../includes/subscription_check.php';
                     $limit = $_SESSION['limits']['staff'] ?? 1;
                     $countStmt = $pdo->query("SELECT COUNT(*) FROM users WHERE Role != 'ADMIN'");
                     $currentStaff = $countStmt->fetchColumn();
@@ -290,7 +290,7 @@ $extra_css = '
         }
     </style>
 ';
-include '../includes/header.php';
+include __DIR__ . '/../includes/header.php';
 ?>
     <div class="main-container">
         <!-- Header -->
@@ -637,4 +637,4 @@ include '../includes/header.php';
             alert('Bulk actions functionality');
         }
     </script>
-<?php include '../includes/footer.php'; ?>
+<?php include __DIR__ . '/../includes/footer.php'; ?>

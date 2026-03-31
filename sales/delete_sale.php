@@ -1,6 +1,6 @@
 <?php
 // sales/delete_sale.php
-require_once '../config/database.php';
+require_once __DIR__ . '/../config/database.php';
 session_start();
 
 // Check if user has permission (optional - add your auth check)
