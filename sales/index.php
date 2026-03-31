@@ -11,8 +11,18 @@ if (!isset($_SESSION['user_id'])) {
 $today_sales_query = "SELECT COUNT(*) as total_sales, COALESCE(SUM(FinalAmount), 0) as total_revenue FROM sales WHERE DATE(SaleDate) = CURDATE()";
 $today_stats = $pdo->query($today_sales_query)->fetch(PDO::FETCH_ASSOC);
 
-// Get recent sales
-$recent_sales_query = "SELECT * FROM sales_summary ORDER BY SaleDate DESC LIMIT 10";
+// Get recent sales (Refactored to avoid using VIEWs for InfinityFree)
+$recent_sales_query = "
+    SELECT 
+        s.*,
+        COUNT(si.ItemID) as TotalItems,
+        COALESCE(SUM(si.Quantity), 0) as TotalQuantity
+    FROM sales s
+    LEFT JOIN sales_items si ON s.SaleID = si.SaleID
+    GROUP BY s.SaleID
+    ORDER BY s.SaleDate DESC
+    LIMIT 10
+";
 $recent_sales = $pdo->query($recent_sales_query)->fetchAll(PDO::FETCH_ASSOC);
 ?>
 

@@ -66,7 +66,7 @@ $total_pages = ceil($total_records / $limit);
 $sales_query = "
     SELECT 
         s.*,
-        COUNT(si.SaleItemID) as TotalItems,
+        COUNT(si.ItemID) as TotalItems,
         SUM(si.Quantity) as TotalQuantity
     FROM sales s
     LEFT JOIN sales_items si ON s.SaleID = si.SaleID

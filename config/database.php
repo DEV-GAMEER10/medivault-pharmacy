@@ -1,12 +1,23 @@
 <?php
 // Database configuration
-define('DB_HOST', getenv('DB_HOST') ?: 'localhost');
-define('DB_NAME', getenv('DB_NAME') ?: 'pharmaceutical_inventory');
-define('DB_USER', getenv('DB_USER') ?: 'root');
-define('DB_PASS', getenv('DB_PASS') ?: '');
+// Database configuration
+if (strpos($_SERVER['HTTP_HOST'] ?? '', 'localhost') !== false || strpos($_SERVER['HTTP_HOST'] ?? '', '127.0.0.1') !== false) {
+    // Local XAMPP Settings
+    define('DB_HOST', 'localhost');
+    define('DB_NAME', 'pharmaceutical_inventory');
+    define('DB_USER', 'root');
+    define('DB_PASS', '');
+} else {
+    // InfinityFree / Production Settings
+    // Replace these with the values from your InfinityFree Control Panel (MySQL Databases)
+    define('DB_HOST', getenv('DB_HOST') ?: 'sql212.infinityfree.com');
+    define('DB_NAME', getenv('DB_NAME') ?: 'if0_41443010_pharmacy');
+    define('DB_USER', getenv('DB_USER') ?: 'if0_41443010');
+    define('DB_PASS', getenv('DB_PASS') ?: 'YOUR_VPANEL_PASSWORD'); // ← Put your InfinityFree Password here!
+}
 
 try {
-    // Check if DB_HOST contains a port
+    // Port handling for Aiven/Docker
     $host_parts = explode(':', DB_HOST);
     $host = $host_parts[0];
     $port = isset($host_parts[1]) ? $host_parts[1] : '3306';
@@ -20,7 +31,8 @@ try {
         [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::ATTR_EMULATE_PREPARES => false
+            PDO::ATTR_EMULATE_PREPARES => false,
+            PDO::ATTR_TIMEOUT => 5 // 5 seconds timeout
         ]
     );
     

@@ -55,6 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         // Insert sale items
         $item_stmt = $pdo->prepare("INSERT INTO sales_items (SaleID, ItemID, ItemName, BatchNumber, Category, TypeForm, Quantity, UnitPrice, TotalPrice, CostPrice) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         
+        // Prepare inventory update statement (since InfinityFree doesn't support triggers)
+        $update_stock_stmt = $pdo->prepare("UPDATE medicines SET Quantity = Quantity - ? WHERE ItemID = ?");
+
         foreach ($items as $item) {
             $qty = (float)$item['quantity'];
             $price = (float)$item['price'];
@@ -73,6 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                 $total_price,
                 $cost
             ]);
+
+            // Manually update inventory (Replacement for database trigger)
+            $update_stock_stmt->execute([$qty, $item['item_id']]);
         }
         
         $pdo->commit();
